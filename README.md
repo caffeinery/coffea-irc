@@ -16,9 +16,10 @@ Specify the telegram protocol in your network config:
 ```js
 {
   "protocol": "irc",
-  "network": "chat.freenode.net",
-  "nick": "coffeabot1337",
-  "channels": [ "#caffeinery" ]
+  "network": "chat.freenode.net", // required
+  "nick": "coffeabot1337", // required
+  "channels": [ "#caffeinery" ], // optional
+  "prefix": "." // optional, default: !
 }
 ```
 
