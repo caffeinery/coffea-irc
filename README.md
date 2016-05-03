@@ -54,3 +54,16 @@ networks.send({
   args: [ 'MODE', '#caffeinery', '+v', 'coffeabot1337' ]
 })
 ```
+
+
+## Colors / Formatting
+
+Not supported by coffea yet, so use [irc-colors](https://www.npmjs.com/package/irc-colors) for now:
+
+```js
+import { blue } from 'irc-colors'
+
+networks.on('message', (msg, reply) => reply(message(msg.channel,
+  blue("blue text")
+)))
+```
