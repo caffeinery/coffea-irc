@@ -56,6 +56,19 @@ networks.send({
 ```
 
 
+## Special events
+
+You can find a list of all events in the [`node-irc` documentation](http://node-irc.readthedocs.io/en/latest/API.html#events).
+
+All events listed there are forwarded to coffea, arguments to the function become part of the `evt` object, e.g.:
+
+```js
+networks.on('motd', (evt) => {
+  console.log('motd received: ', evt.motd)
+})
+```
+
+
 ## Colors / Formatting
 
 Not supported by coffea yet, so use [irc-colors](https://www.npmjs.com/package/irc-colors) for now:

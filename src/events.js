@@ -3,7 +3,21 @@ const { log } = dude('coffea-irc:events')
 
 import { message, command, error } from 'coffea'
 
+const listenToEvent = (client, dispatch, name) =>
+  client.addListener(name, (...args) =>
+    dispatch({
+      ...args,
+      type: name
+    })
+  )
+
+const listenToEvents = (client, dispatch, names) => names.map(
+  (name) => listenToEvent(client, dispatch, name)
+)
+
 export default function events (client, config, dispatch) {
+  client.connect(() => dispatch({ type: 'connect' }))
+
   client.addListener('message', (from, to, text) => dispatch(message(
     to, // channel
     text, // text
@@ -27,4 +41,12 @@ export default function events (client, config, dispatch) {
   })
 
   client.addListener('error', (err) => dispatch(error(err)))
+
+  listenToEvents(client, dispatch, [
+    'registered', 'motd', 'names', 'topic', 'join', 'part', 'quit', 'kick',
+    'kill', 'selfMessage', 'notice', 'ping', 'pm', 'ctcp', 'ctcp-notice',
+    'ctcp-privmsg', 'ctcp-version', 'nick', 'invite', '+mode', '-mode',
+    'whois', 'channellist_start', 'channellist_item', 'channellist', 'raw',
+    'action'
+  ])
 }
