@@ -3,6 +3,8 @@ const { log } = dude('coffea-irc:events')
 
 import { message, command, error } from 'coffea'
 
+import { initOnConnect } from './init'
+
 const listenToEvent = (client, dispatch, name) =>
   client.addListener(name, (...args) =>
     dispatch({
@@ -16,7 +18,10 @@ const listenToEvents = (client, dispatch, names) => names.map(
 )
 
 export default function events (client, config, dispatch) {
-  client.connect(() => dispatch({ type: 'connect' }))
+  client.connect(() => {
+    initOnConnect(client, config)
+    dispatch({ type: 'connect' })
+  })
 
   client.addListener('message', (from, to, text) => dispatch(message(
     to, // channel

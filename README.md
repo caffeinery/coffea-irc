@@ -19,6 +19,7 @@ Specify the telegram protocol in your network config:
   "network": "chat.freenode.net", // required
   "nick": "coffeabot1337", // required
   "channels": [ "#caffeinery" ], // optional
+  "bot": true, // optional, sets umode +B (marks user as bot), default: true
   "prefix": "." // optional, default: !
 }
 ```
