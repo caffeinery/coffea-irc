@@ -41,7 +41,7 @@ export default function events (client, config, dispatch) {
         cmd, // cmd
         args, // args
         options: { from } // additional data
-      ))
+      }))
     }
   })
 
