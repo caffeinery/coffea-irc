@@ -23,11 +23,11 @@ export default function events (client, config, dispatch) {
     dispatch({ type: 'connect' })
   })
 
-  client.addListener('message', (from, to, text) => dispatch(message(
-    to, // channel
+  client.addListener('message', (from, to, text) => dispatch(message({
+    chat: to, // channel
     text, // text
-    { from } // additional data
-  )))
+    options: { from } // additional data
+  })))
 
   client.addListener('message', (from, to, text) => {
     log('message event received: %o', { from, to, text })
@@ -36,16 +36,16 @@ export default function events (client, config, dispatch) {
       let args = text.substring(1).split(' ') // [ 'nw', 'name' ]
       let cmd = args.shift() // nw
       // args is now [ 'name' ]
-      return dispatch(command(
-        to, // channel
+      return dispatch(command({
+        chat: to, // channel
         cmd, // cmd
         args, // args
-        { from } // additional data
+        options: { from } // additional data
       ))
     }
   })
 
-  client.addListener('error', (err) => dispatch(error(err)))
+  client.addListener('error', (err) => dispatch(error({ err })))
 
   listenToEvents(client, dispatch, [
     'registered', 'motd', 'names', 'topic', 'join', 'part', 'quit', 'kick',
