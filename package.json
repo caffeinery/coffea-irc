@@ -1,6 +1,6 @@
 {
   "name": "coffea-irc",
-  "version": "1.0.0-beta6",
+  "version": "1.0.0-beta6-1",
   "main": "lib/index.js",
   "devDependencies": {
     "babel-cli": "^6.8.0",
@@ -14,7 +14,7 @@
     "rimraf": "^2.5.2"
   },
   "dependencies": {
-    "coffea": "^1.0.0-beta18",
+    "coffea": "1.0.0-beta18",
     "debug-dude": "^1.0.3",
     "irc": "^0.5.0"
   },
